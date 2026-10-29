@@ -11,7 +11,7 @@ class MotorSystem {
 
     void set_direction(int16_t dir) { // clockwise atw counterclockwise tergantung pwm (dir)
       int speed = (abs(dir)); // geser 2 bit, 512 to 128
-      analogWrite(pwm, speed);
+      analogWrite(pwm, speed >> 3);
       if (dir > 0) {
         digitalWrite(in1, HIGH);
         digitalWrite(in2, LOW);
@@ -101,10 +101,10 @@ void loop() {
     }
 
     // return value jadi pwm normal, kek ngaliin jadi persentase, btw isinya dir jadi udh >> 2 // gw ganti >> 2 nya disini karna masi keliatan brutal
-    fl.set_direction((int16_t pFL * 512) >> 2);
-    fr.set_direction((int16_t pFR * 512) >> 2);
-    bl.set_direction((int16_t pBL * 512) >> 2);
-    br.set_direction((int16_t pBR * 512) >> 2);
+    fl.set_direction((int16_t) (pFL * 512));
+    fr.set_direction((int16_t) (pFR * 512));
+    bl.set_direction((int16_t) (pBL * 512));
+    br.set_direction((int16_t) (pBR * 512));
 
   } 
   else {
